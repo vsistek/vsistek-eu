@@ -1,0 +1,335 @@
+<!--
+ * Copyright 2010, Google Inc.
+ * Copyright 2021, Vaclav Sistek
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are
+ * met:
+ *
+ *     * Redistributions of source code must retain the above copyright
+ * notice, this list of conditions and the following disclaimer.
+ *     * Redistributions in binary form must reproduce the above
+ * copyright notice, this list of conditions and the following disclaimer
+ * in the documentation and/or other materials provided with the
+ * distribution.
+ *     * Neither the name of Google Inc. nor the names of its
+ * contributors may be used to endorse or promote products derived from
+ * this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<!--
+WebGL-powered background based on https://webglsamples.org/electricflower/electricflower.html
+-->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Václav Šístek</title>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap" rel="stylesheet">
+<style>
+html, body {
+  width: 100%;
+  height: 100%;
+  border: 0px;
+  padding: 0px;
+  margin: 0px;
+  background-color: white;
+  overflow: hidden;
+  font-family: 'Fira Sans Condensed', sans-serif;
+  text-shadow: 0.1em 0.1em black;
+}
+canvas {
+  background-color: red;
+}
+#viewContainer {
+  width: 100%;
+  height: 100%;
+}
+.contentContainer {
+  margin: auto;
+  position: absolute;
+  bottom: 20%;
+  right: 20%;
+  z-index: 2;
+  color: white;
+}
+#symbol {
+  font-size: 350%;
+  font-family: serif;
+  text-align: right;
+  padding: 0;
+  letter-spacing: 0.2em;
+  color: cyan;
+}
+#name {
+  font-size: 150%;
+  text-align: center;
+  padding: 0.5em;
+}
+#text {
+  background-color: rgba(0,0,0,0.2);
+  border-radius: 0.5em;
+  line-height: 120%;
+  padding: 1em;
+}
+.center {
+  text-align: center;
+}
+#legalIcon {
+  color: cyan;
+  cursor: pointer;
+  font-size: 200%;
+  position: fixed;
+  bottom: 0.2em;
+  left: 0.5em;
+  z-index: 2;
+}
+#legalBox {
+  background-color: rgba(0,0,0,0.2);
+  border-radius: 0.5em;
+  padding: 1em;
+  padding-top: 1.5em;
+  color: white;
+  position: fixed;
+  bottom: 2.5em;
+  left: 0.5em;
+  z-index: 2;
+  display: none;
+}
+#closeButton {
+  cursor: pointer;
+  position: absolute;
+  right: 0.3em;
+  top: 0;
+  font-size: 200%;
+  z-index: 3;
+}
+pre {
+  font-family: 'Fira Mono', sans-serif;
+  font-size: 60%;
+}
+a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+a:hover {
+  color: cyan;
+}
+a.active {
+  color: cyan;
+}
+</style>
+<script src="tdl/base.js"></script>
+<script src="flower.js"></script>
+<script src="postprocess.js"></script>
+<script src="main.js"></script>
+
+</head>
+
+<body>
+<div class="contentContainer">
+  <div id="symbol">
+    <!-- &#9774; &hearts; #!
+    &#9617;&#9618;&#9619;&#9608;&#9619;&#9618;&#9617;-->
+    &#9774;&hearts;&#9787;
+  </div>
+  <div id="text">
+    <div id="name">Václav Šístek (* 1984)</div>
+    <div class="center">[ˈvaːtslaf ʃiːstɛk]
+    <p>&#8258;</p></div>
+    * UNIX/Linux &amp; DevOps professional<br/>
+    * Open-source software advocate<br/>
+    * Based in Prague, Czechia (EU)
+  <div class="center">
+    <p>&#8258;</p>
+    <span id="email">[allow js to see email]</span><br>
+    <a href="https://github.com/vsistek">[GitHub]</a>
+    <a href="https://www.linkedin.com/in/vaclavsistek/">[LinkedIn]</a>
+  </div>
+  </div>
+</div>
+<div id="viewContainer">
+<canvas id="render_area" width="1280" height="720" style="width: 100%; height: 100%;"></canvas>
+</div>
+<div id="legalIcon" onclick="toggleLegalBox()">
+  &#9878;
+</div>
+<div id="legalBox">
+  <div id="closeButton" onclick="toggleLegalBox()">
+    &times;
+  </div>
+WebGL-powered background is based on<br> 
+<h2><a href="https://webglsamples.org/electricflower/electricflower.html">Electricflower</a></h2>
+by Henrik Rydgård from Google<br/>
+as a contribution to <a href="https://webglsamples.org/">WebGL Samples</a> library<br/>
+<br/>
+This derived work is distributed under the following license:
+<pre>
+Copyright 2010, Google Inc.
+Copyright 2021, Vaclav Sistek
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+    * Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above
+copyright notice, this list of conditions and the following disclaimer
+in the documentation and/or other materials provided with the
+distribution.
+    * Neither the name of Google Inc. nor the names of its
+contributors may be used to endorse or promote products derived from
+this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</pre>
+</div>
+</body>
+
+<script>
+var user = 'vsistek',
+    domain = 'fsfe.org'
+document.getElementById('email').innerHTML = user + '@' + domain;;
+
+legalBox = document.getElementById('legalBox');
+legalBox.style.display = "none";
+
+function toggleLegalBox() {
+  if (legalBox.style.display === "none") {
+    legalBox.style.display = "block";
+  } else {
+    legalBox.style.display = "none";
+  }
+}
+
+</script>
+
+<script id="flower_fs" type="x-shader/x-fragment">
+  precision mediump float;
+  varying vec4 v_color;
+  void main(void) {
+    gl_FragColor = v_color;
+  }
+</script>
+
+<script id="flower_vs" type="x-shader/x-vertex">
+  attribute vec3 position;
+  attribute vec2 texCoord;
+
+  uniform vec4 u_color;
+  uniform vec4 u_color2;
+  uniform mat4 u_worldviewproj;
+  uniform float u_time;
+  varying vec4 v_color;
+  varying vec2 v_texCoord;
+
+  vec3 rotateX(vec3 v, float angle) {
+    float s = sin(angle);
+    float c = cos(angle);
+    return vec3(v.x, c * v.y + s * v.z, -s * v.y + c * v.z);
+  }
+  vec3 rotateY(vec3 v, float angle) {
+    float s = sin(angle);
+    float c = cos(angle);
+    return vec3(c * v.x + s * v.z, v.y, -s * v.x + c * v.z);
+  }
+  vec3 rotateZ(vec3 v, float angle) {
+    float s = sin(angle);
+    float c = cos(angle);
+    return vec3(c * v.x + s * v.y, -s * v.x + c * v.y, v.z);
+  }
+
+  void main(void) {
+    vec2 tc = texCoord;
+    v_texCoord = tc;
+    v_color = mix(u_color, u_color2, tc.x);
+    v_color *= v_color.w;
+    vec3 pos = rotateZ(rotateX(rotateY(position,
+       -u_time + tc.x*6.1), -u_time * 0.6 + tc.x*8.1), -u_time * 0.7 + tc.x*7.12);
+    gl_Position = u_worldviewproj * vec4(pos, 1.0);
+  }
+</script>
+
+<script id="quad_vs" type="text/something-not-javascript">
+  attribute vec4 position;
+  varying vec4 v_position;
+  varying vec2 v_texCoord;
+  void main() {
+    vec2 tc = (position.xy + vec2(1.0, 1.0)) / 2.0;
+    v_texCoord = tc;
+    gl_Position = position;
+  }
+</script>
+
+<script id="blur_fs" type="text/something-not-javascript">
+  precision mediump float;
+  varying vec2 v_texCoord;
+  uniform vec2 blurSize;
+  uniform vec4 subtract;
+  uniform sampler2D mainSampler;
+  void main() {
+     vec4 sum = vec4(0.0);
+     sum += texture2D(mainSampler, v_texCoord - 4.0 * blurSize) * 0.05;
+     sum += texture2D(mainSampler, v_texCoord - 3.0 * blurSize) * 0.09;
+     sum += texture2D(mainSampler, v_texCoord - 2.0 * blurSize) * 0.12;
+     sum += texture2D(mainSampler, v_texCoord - 1.0 * blurSize) * 0.15;
+     sum += texture2D(mainSampler, v_texCoord                 ) * 0.16;
+     sum += texture2D(mainSampler, v_texCoord + 1.0 * blurSize) * 0.15;
+     sum += texture2D(mainSampler, v_texCoord + 2.0 * blurSize) * 0.12;
+     sum += texture2D(mainSampler, v_texCoord + 3.0 * blurSize) * 0.09;
+     sum += texture2D(mainSampler, v_texCoord + 4.0 * blurSize) * 0.05;
+     gl_FragColor = sum - subtract;
+  }
+</script>
+
+<script id="copy_fs" type="text/something-not-javascript">
+  precision mediump float;
+  varying vec2 v_texCoord;
+  uniform sampler2D mainSampler;
+  void main() {
+    gl_FragColor = texture2D(mainSampler, v_texCoord);
+  }
+</script>
+
+<script id="add_fs" type="text/something-not-javascript">
+  precision mediump float;
+  varying vec2 v_texCoord;
+  uniform sampler2D mainSampler;
+  uniform sampler2D secondSampler;
+  void main() {
+    gl_FragColor = texture2D(mainSampler, v_texCoord) + texture2D(secondSampler, v_texCoord);
+  }
+</script>
+
+</html>
