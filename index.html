@@ -77,8 +77,8 @@ canvas {
   font-family: serif;
   text-align: right;
   padding: 0;
-  letter-spacing: 0.2em;
   color: cyan;
+  cursor: pointer;
 }
 #name {
   font-size: 150%;
@@ -149,10 +149,7 @@ a.active {
 
 <body>
 <div class="contentContainer">
-  <div id="symbol">
-    <!-- &#9774; &hearts; #!
-    &#9617;&#9618;&#9619;&#9608;&#9619;&#9618;&#9617;
-    &#x10085;&#x10082;-->
+  <div id="symbol" onclick="randomSymbol()">
     &#x13153;
   </div>
   <div id="text">
@@ -231,6 +228,15 @@ function toggleLegalBox() {
   } else {
     legalBox.style.display = "none";
   }
+}
+
+function randomSymbol() {
+  var symbols = ['&#x13153;',  // Egyptian Hieroglyph G017 (owl)
+                 '&#x1302C;']; // Egyptian Hieroglyph A039 (man with giraffes)
+  
+  const random = Math.floor(Math.random() * symbols.length);
+  document.getElementById('symbol').innerHTML = symbols[random]
+  
 }
 
 </script>
