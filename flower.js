@@ -31,8 +31,7 @@
  */
 
 function FlowerEffect() {
-  //var arrays = tdl.primitives.createFlaredCube(0.01, 3.0, 1400)
-  var arrays = tdl.primitives.createSphere(1, 128, 128)
+  var arrays = tdl.primitives.createCube(1);
   var program = tdl.programs.loadProgramFromScriptTags("flower_vs", "flower_fs")
   var textures = []
 
@@ -72,8 +71,8 @@ function FlowerEffect() {
   }
 
   this.render = function(framebuffer, time, hue, sat) {
-    m4.perspective(proj, tdl.math.degToRad(60), aspect, 0.1, 500);
-    m4.rotationY(world, time*0.2)
+    m4.perspective(proj, tdl.math.degToRad(120), aspect, 0.1, 1);
+    m4.rotationY(world, time*1.5)
     m4.mul(viewproj, view, proj)
     m4.mul(worldviewproj, world, viewproj)
 

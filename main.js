@@ -57,7 +57,7 @@ var g_hueMax = 1;
 var g_hue = g_hueMax;
 var g_sat = 1;
 var g_add = 1;
-var g_step = 0.0005;
+var g_step = 0.001;
 
 if (!window.Float32Array) {
   // This just makes some errors go away when there is no WebGL.
@@ -74,8 +74,7 @@ function mainloop() {
   var bootTime = (new Date()).getTime();
   var singleEffect = new FlowerEffect();
   function render() {
-    //var now = ((new Date()).getTime() - bootTime) * 0.0001;
-    var now = ((new Date()).getTime() - bootTime) * 0.0001;
+    var now = ((new Date()).getTime() - bootTime) * 0.00005;
     aspect = canvas.clientWidth / canvas.clientHeight
     var framebuffer = backbuffer;
 
