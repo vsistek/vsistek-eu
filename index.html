@@ -142,7 +142,6 @@ a.active {
 </style>
 <script src="tdl/base.js"></script>
 <script src="flower.js"></script>
-<script src="postprocess.js"></script>
 <script src="main.js"></script>
 
 </head>
@@ -308,57 +307,6 @@ function randomSymbol() {
     vec3 pos = rotateZ(rotateX(rotateY(position,
        -u_time + tc.x*6.1), -u_time * 0.6 + tc.x*8.1), -u_time * 0.7 + tc.x*7.12);
     gl_Position = u_worldviewproj * vec4(pos, 1.0);
-  }
-</script>
-
-<script id="quad_vs" type="x-shader/x-vertex">
-  attribute vec4 position;
-  varying vec4 v_position;
-  varying vec2 v_texCoord;
-  void main() {
-    vec2 tc = (position.xy + vec2(1.0, 1.0)) / 2.0;
-    v_texCoord = tc;
-    gl_Position = position;
-  }
-</script>
-
-<script id="blur_fs" type="x-shader/x-fragment">
-  precision mediump float;
-  varying vec2 v_texCoord;
-  uniform vec2 blurSize;
-  uniform vec4 subtract;
-  uniform sampler2D mainSampler;
-  void main() {
-     vec4 sum = vec4(0.0);
-     sum += texture2D(mainSampler, v_texCoord - 4.0 * blurSize) * 0.05;
-     sum += texture2D(mainSampler, v_texCoord - 3.0 * blurSize) * 0.09;
-     sum += texture2D(mainSampler, v_texCoord - 2.0 * blurSize) * 0.12;
-     sum += texture2D(mainSampler, v_texCoord - 1.0 * blurSize) * 0.15;
-     sum += texture2D(mainSampler, v_texCoord                 ) * 0.16;
-     sum += texture2D(mainSampler, v_texCoord + 1.0 * blurSize) * 0.15;
-     sum += texture2D(mainSampler, v_texCoord + 2.0 * blurSize) * 0.12;
-     sum += texture2D(mainSampler, v_texCoord + 3.0 * blurSize) * 0.09;
-     sum += texture2D(mainSampler, v_texCoord + 4.0 * blurSize) * 0.05;
-     gl_FragColor = sum - subtract;
-  }
-</script>
-
-<script id="copy_fs" type="x-shader/x-fragment">
-  precision mediump float;
-  varying vec2 v_texCoord;
-  uniform sampler2D mainSampler;
-  void main() {
-    gl_FragColor = texture2D(mainSampler, v_texCoord);
-  }
-</script>
-
-<script id="add_fs" type="x-shader/x-fragment">
-  precision mediump float;
-  varying vec2 v_texCoord;
-  uniform sampler2D mainSampler;
-  uniform sampler2D secondSampler;
-  void main() {
-    gl_FragColor = texture2D(mainSampler, v_texCoord) + texture2D(secondSampler, v_texCoord);
   }
 </script>
 

@@ -48,7 +48,6 @@ var aspect;
 
 // Use this to refer to the backbuffer as if it were another framebuffer
 var backbuffer;
-var post;
 var quad;
 var g_requestId;
 
@@ -96,9 +95,7 @@ function mainloop() {
 
 function initializeGraphics() {
   aspect = canvas.clientWidth / canvas.clientHeight
-  quad = new QuadDrawer()
   backbuffer = tdl.framebuffers.getBackBuffer(canvas)
-  post = new PostProcessor(canvas.width, canvas.height)
 
   // Set some sane defaults.
   gl.disable(gl.BLEND);
