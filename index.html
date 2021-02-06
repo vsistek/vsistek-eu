@@ -73,12 +73,9 @@ canvas {
   max-width: 80%;
 }
 #symbol {
-  font-size: 800%;
-  font-family: serif;
   text-align: right;
   padding: 0;
   color: cyan;
-  cursor: pointer;
 }
 #name {
   font-size: 150%;
@@ -148,10 +145,22 @@ a.active {
 
 <body>
 <div class="contentContainer">
-  <div id="symbol" onclick="randomSymbol()">
-    &#x271A;
+  <div id="symbol">
+    <pre>
+      ▓▓▓▓▓▓▓▓░      
+    ▓▓░  ▓▓░  ▓▓░    
+  ▓▓░    ▓▓░    ▓▓░  
+ ▓▓░     ▓▓░     ▓▓░ 
+▓▓░      ▓▓░      ▓▓░
+▓▓░     ▓▓▓▓░     ▓▓░
+▓▓░   ▓▓░▓▓░▓▓░   ▓▓░
+ ▓▓░▓▓░  ▓▓░  ▓▓░▓▓░ 
+  ▓▓░    ▓▓░    ▓▓░  
+    ▓▓░  ▓▓░  ▓▓░    
+      ▓▓▓▓▓▓▓▓░      
+    </pre>
   </div>
-  <div id="text" onclick="resetSymbol()">
+  <div id="text">
     <div id="name">Václav Šístek (* 1984)</div>
     <div class="center">[ˈvaːtslaf ʃiːstɛk]</div>
     <ul>
@@ -167,7 +176,7 @@ a.active {
   </div>
   </div>
 </div>
-<div id="viewContainer" onclick="resetSymbol()">
+<div id="viewContainer">
 <canvas id="render_area" width="1280" height="720" style="width: 100%; height: 100%;"></canvas>
 </div>
 <div id="copyright" onclick="toggleLegalBox()">
@@ -227,41 +236,6 @@ function toggleLegalBox() {
   } else {
     legalBox.style.display = "none";
   }
-}
-
-function resetSymbol() {
-  document.getElementById('symbol').innerHTML = '&#x271A;';
-}
-resetSymbol();
-
-var g_symbols = ['13153',  // Hieroglyph G017 owl
-                 '130D2',  // Hieroglyph E001 bull
-                 '130D3',  // Hieroglyph E002 charging bull
-                 '130D4',  // Hieroglyph E003 calf
-                 '130D6',  // Hieroglyph E005 cow with calf
-                 '130D8',  // Hieroglyph E007 donkey
-                 '130DA',  // Hieroglyph E008A jumping kid
-                 '130DF',  // Hieroglyph E012 pig
-                 '130E0',  // Hieroglyph E013 cat
-                 '130E1',  // Hieroglyph E014 dog
-                 '130EF',  // Hieroglyph E025 hyppo
-                 '130E6',  // Hieroglyph E017A jackal
-                 '130EC',  // Hieroglyph E022 lion
-                 '130F8',  // Hieroglyph E033 monkey
-                 '130F9',  // Hieroglyph E034 hare
-                 '130FB',  // Hieroglyph E036 sitting monkey
-                 '13143',  // Hieroglyph G005 falcon
-                 '1318C',  // Hieroglyph I005 alligator
-                 '13191',  // Hieroglyph I009 horned snake
-                 '1319C',  // Hieroglyph K002 fish
-                 '132CF',  // Hieroglyph R028 weird creature
-                 '1315F',  // Hieroglyph G27 flamingo
-                 '1316A',  // Hieroglyph G37 sparrow
-                 '1302C'];  // Hieroglyph A039 man with giraffes
-
-function randomSymbol() {
-  const random = Math.floor(Math.random() * g_symbols.length);
-  document.getElementById('symbol').innerHTML = '&#x' + g_symbols[random] + ';';
 }
 
 </script>
