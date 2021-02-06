@@ -44,7 +44,7 @@ WebGL-powered background based on https://webglsamples.org/electricflower/electr
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Condiment&display=swap" rel="stylesheet">
 <style>
 html, body {
   width: 100%;
@@ -79,22 +79,29 @@ canvas {
 }
 #symbol {
   text-align: left;
-  color: cyan;
+  color: rgba(0,0,0,1);
   width: auto;
   display: inline-block;
   right: 0;
-  font-size: 500%;
-  font-family: 'Architects Daughter', sans-serif;
-  margin-right: -0.5em;
-  margin-bottom: -1em;
+  font-size: 650%;
+  font-family: 'Condiment', sans-serif;
+  letter-spacing: -0.02em;
+  text-shadow: -0.01em -0.01em cyan, 0.01em 0.01em red;
+  margin-bottom: -0.5em;
 }
 #name {
   font-size: 150%;
   text-align: center;
   padding: 0.5em;
 }
+#born {
+  font-size: 75%;
+  display: inline;
+}
 #text {
   background-color: rgba(0,0,0,0.2);
+  backdrop-filter: blur(1em);
+  box-shadow: -0.05em -0.05em cyan, 0.05em 0.05em red;
   border-radius: 0.5em;
   line-height: 120%;
   padding: 1em;
@@ -123,6 +130,7 @@ canvas {
   z-index: 2;
   display: none;
   max-width: 100%;
+  box-shadow: -0.05em -0.05em cyan, 0.05em 0.05em red;
 }
 #closeButton {
   cursor: pointer;
@@ -158,11 +166,11 @@ a.active {
 <div class="contentContainer">
   <div id="symbolBox">
     <div id="symbol">
-    (o-O }
+    vsistek.eu
     </div>
   </div>
   <div id="text">
-    <div id="name">Václav Šístek (* 1984)</div>
+    <div id="name">Václav Šístek <div id="born">(* 1984)</div></div>
     <div class="center">[ˈvaːtslaf ʃiːstɛk]</div>
     <ul>
     <li>UNIX/Linux &amp; DevOps professional</li>

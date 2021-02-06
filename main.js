@@ -46,7 +46,7 @@ var backbuffer;
 var quad;
 var g_requestId;
 
-var g_hueMin = 0.7;
+var g_hueMin = 0.5;
 var g_hueMax = 1;
 var g_hue = g_hueMax;
 var g_sat = 1;
