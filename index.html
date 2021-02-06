@@ -73,7 +73,7 @@ canvas {
   max-width: 80%;
 }
 #symbol {
-  font-size: 500%;
+  font-size: 800%;
   font-family: serif;
   text-align: right;
   padding: 0;
@@ -149,7 +149,7 @@ a.active {
 <body>
 <div class="contentContainer">
   <div id="symbol" onclick="randomSymbol()">
-    &#x13153;
+    &#x271A;
   </div>
   <div id="text">
     <div id="name">Václav Šístek (* 1984)</div>
@@ -229,37 +229,34 @@ function toggleLegalBox() {
   }
 }
 
+var g_symbols = ['13153',  // Hieroglyph G017 owl
+                 '130D2',  // Hieroglyph E001 bull
+                 '130D3',  // Hieroglyph E002 charging bull
+                 '130D4',  // Hieroglyph E003 calf
+                 '130D6',  // Hieroglyph E005 cow with calf
+                 '130D8',  // Hieroglyph E007 donkey
+                 '130DA',  // Hieroglyph E008A jumping kid
+                 '130DF',  // Hieroglyph E012 pig
+                 '130E0',  // Hieroglyph E013 cat
+                 '130E1',  // Hieroglyph E014 dog
+                 '130EF',  // Hieroglyph E025 hyppo
+                 '130E6',  // Hieroglyph E017A jackal
+                 '130EC',  // Hieroglyph E022 lion
+                 '130F8',  // Hieroglyph E033 monkey
+                 '130F9',  // Hieroglyph E034 hare
+                 '130FB',  // Hieroglyph E036 sitting monkey
+                 '13143',  // Hieroglyph G005 falcon
+                 '1318C',  // Hieroglyph I005 alligator
+                 '13191',  // Hieroglyph I009 horned snake
+                 '1319C',  // Hieroglyph K002 fish
+                 '132CF',  // Hieroglyph R028 weird creature
+                 '1315F',  // Hieroglyph G27 flamingo
+                 '1316A',  // Hieroglyph G37 sparrow
+                 '1302C'];  // Hieroglyph A039 man with giraffes
+
 function randomSymbol() {
-  var symbols = ['&#x13153;',  // Egyptian Hieroglyph G017 (default owl)
-                 '&#x1300E;',  // EGYPTIAN HIEROGLYPH A012 (archer)
-                 '&#x130D4;',  // EGYPTIAN HIEROGLYPH E003 (calf)
-                 '&#x130D8;',  // EGYPTIAN HIEROGLYPH E007 (donkey)
-                 '&#x130DA;',  // EGYPTIAN HIEROGLYPH E008A (jumping kid)
-                 '&#x130E0;',  // EGYPTIAN HIEROGLYPH E013 (cat)
-                 '&#x130E1;',  // EGYPTIAN HIEROGLYPH E014 (dog)
-                 '&#x130E6;',  // EGYPTIAN HIEROGLYPH E017A (jackal)
-                 '&#x130EC;',  // EGYPTIAN HIEROGLYPH E022 (lion)
-                 '&#x130F8;',  // EGYPTIAN HIEROGLYPH E033 (monkey)
-                 '&#x130F9;',  // EGYPTIAN HIEROGLYPH E034 (hare)
-                 '&#x13140;',  // EGYPTIAN HIEROGLYPH G002 (2 falcons)
-                 '&#x13183;',  // EGYPTIAN HIEROGLYPH H005 (wing)
-                 '&#x13191;',  // EGYPTIAN HIEROGLYPH I009 (horned snake)
-                 '&#x1319C;',  // EGYPTIAN HIEROGLYPH K002 (fish)
-                 '&#x131B8;',  // EGYPTIAN HIEROGLYPH M009 (flower)
-                 '&#x131C8;',  // EGYPTIAN HIEROGLYPH M015A (flowers)
-                 '&#x131D7;',  // EGYPTIAN HIEROGLYPH M026 (5 flowers)
-                 '&#x132CF;',  // EGYPTIAN HIEROGLYPH R028 (weird creature)
-                 '&#x13369;',  // EGYPTIAN HIEROGLYPH V001G (4x2 spirals)
-                 '&#x13154;',  // EGYPTIAN HIEROGLYPH G18 (two owls)
-                 '&#x1315F;',  // EGYPTIAN HIEROGLYPH G27 (flamingo)
-                 '&#x13162;',  // EGYPTIAN HIEROGLYPH G30 (three storks)
-                 '&#x1316A;',  // EGYPTIAN HIEROGLYPH G37 (sparrow)
-                 '&#x131DA;',  // EGYPTIAN HIEROGLYPH M28A (three lilies on village)
-                 '&#x1302C'];  // Egyptian Hieroglyph A039 (man with giraffes)
-  
-  const random = Math.floor(Math.random() * symbols.length);
-  document.getElementById('symbol').innerHTML = symbols[random]
-  
+  const random = Math.floor(Math.random() * g_symbols.length);
+  document.getElementById('symbol').innerHTML = '&#x' + g_symbols[random] + ';'
 }
 
 </script>
