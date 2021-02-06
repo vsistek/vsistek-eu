@@ -72,10 +72,16 @@ canvas {
   color: white;
   max-width: 80%;
 }
-#symbol {
-  text-align: right;
+#symbolBox {
   padding: 0;
+  text-align: right;
+}
+#symbol {
+  text-align: left;
   color: cyan;
+  width: auto;
+  display: inline-block;
+  right: 0;
 }
 #name {
   font-size: 150%;
@@ -145,20 +151,22 @@ a.active {
 
 <body>
 <div class="contentContainer">
-  <div id="symbol">
-    <pre>
-      ▓▓▓▓▓▓▓▓░      
-    ▓▓░  ▓▓░  ▓▓░    
-  ▓▓░    ▓▓░    ▓▓░  
- ▓▓░     ▓▓░     ▓▓░ 
-▓▓░      ▓▓░      ▓▓░
-▓▓░     ▓▓▓▓░     ▓▓░
-▓▓░   ▓▓░▓▓░▓▓░   ▓▓░
- ▓▓░▓▓░  ▓▓░  ▓▓░▓▓░ 
-  ▓▓░    ▓▓░    ▓▓░  
-    ▓▓░  ▓▓░  ▓▓░    
-      ▓▓▓▓▓▓▓▓░      
-    </pre>
+  <div id="symbolBox">
+    <div id="symbol">
+      <pre>
+      ########:
+    ##:  ##:  ##:
+  ##:    ##:    ##:
+ ##:     ##:     ##:
+##:      ##:      ##:
+##:     ####:     ##:
+##:   ##:##:##:   ##:
+ ##:##:  ##:  ##:##:
+  ##:    ##:    ##:
+    ##:  ##:  ##:
+      ########:
+      </pre>
+    </div>
   </div>
   <div id="text">
     <div id="name">Václav Šístek (* 1984)</div>
