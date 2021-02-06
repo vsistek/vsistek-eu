@@ -151,7 +151,7 @@ a.active {
   <div id="symbol" onclick="randomSymbol()">
     &#x271A;
   </div>
-  <div id="text">
+  <div id="text" onclick="resetSymbol()">
     <div id="name">Václav Šístek (* 1984)</div>
     <div class="center">[ˈvaːtslaf ʃiːstɛk]</div>
     <ul>
@@ -167,7 +167,7 @@ a.active {
   </div>
   </div>
 </div>
-<div id="viewContainer">
+<div id="viewContainer" onclick="resetSymbol()">
 <canvas id="render_area" width="1280" height="720" style="width: 100%; height: 100%;"></canvas>
 </div>
 <div id="copyright" onclick="toggleLegalBox()">
@@ -229,6 +229,11 @@ function toggleLegalBox() {
   }
 }
 
+function resetSymbol() {
+  document.getElementById('symbol').innerHTML = '&#x271A;';
+}
+resetSymbol();
+
 var g_symbols = ['13153',  // Hieroglyph G017 owl
                  '130D2',  // Hieroglyph E001 bull
                  '130D3',  // Hieroglyph E002 charging bull
@@ -256,7 +261,7 @@ var g_symbols = ['13153',  // Hieroglyph G017 owl
 
 function randomSymbol() {
   const random = Math.floor(Math.random() * g_symbols.length);
-  document.getElementById('symbol').innerHTML = '&#x' + g_symbols[random] + ';'
+  document.getElementById('symbol').innerHTML = '&#x' + g_symbols[random] + ';';
 }
 
 </script>
