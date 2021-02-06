@@ -31,22 +31,17 @@
  */
 
 tdl.require('tdl.fast');
-tdl.require('tdl.math');
 tdl.require('tdl.primitives');
 tdl.require('tdl.shader');
 tdl.require('tdl.programs');
-tdl.require('tdl.log');
 tdl.require('tdl.models');
-tdl.require('tdl.buffers');
 tdl.require('tdl.framebuffers');
-tdl.require('tdl.textures');
 tdl.require('tdl.webgl');
 
 var gl;
 var canvas;
 var aspect;
 
-// Use this to refer to the backbuffer as if it were another framebuffer
 var backbuffer;
 var quad;
 var g_requestId;
@@ -55,7 +50,6 @@ var g_hueMin = 0.7;
 var g_hueMax = 1;
 var g_hue = g_hueMax;
 var g_sat = 1;
-var g_add = 1;
 var g_step = 0.001;
 
 if (!window.Float32Array) {
@@ -67,9 +61,6 @@ var up = new Float32Array([0, 1, 0])
 var output = alert
 
 function mainloop() {
-  // Repeatedly run render(), attempt to hold 60 but the demo is
-  // framerate independent so we will still keep sync even if we
-  // lose frames.
   var bootTime = (new Date()).getTime();
   var singleEffect = new FlowerEffect();
   function render() {
@@ -96,11 +87,6 @@ function mainloop() {
 function initializeGraphics() {
   aspect = canvas.clientWidth / canvas.clientHeight
   backbuffer = tdl.framebuffers.getBackBuffer(canvas)
-
-  // Set some sane defaults.
-  gl.disable(gl.BLEND);
-  gl.depthFunc(gl.LEQUAL);
-  gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
   return true;
 }
 
@@ -116,7 +102,6 @@ window.onload = function() {
   tdl.webgl.registerContextLostHandler(canvas, handleContextLost);
   tdl.webgl.registerContextRestoredHandler(canvas, handleContextRestored);
 
-  canvas = document.getElementById('render_area');
   gl = tdl.webgl.setupWebGL(canvas);
   if (!gl) {
     return false;
