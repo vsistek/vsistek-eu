@@ -44,8 +44,7 @@ WebGL-powered background based on https://webglsamples.org/electricflower/electr
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Manjari:wght@100&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
 
 <style>
 html, body {
@@ -80,15 +79,25 @@ canvas {
   text-align: right;
 }
 #symbol {
-  text-align: left;
-  color: rgba(0,0,0,1);
+  text-align: center;
+  color: cyan;
   width: auto;
   display: inline-block;
   right: 0;
-  font-size: 200%;
-  font-family: 'Manjari', sans-serif;
-  text-shadow: -0.03em -0.02em cyan, 0.03em 0.02em red;
-  margin-bottom: -0.2em;
+  font-size: 150%;
+  line-height: 1.5em;
+  font-family: 'Major Mono Display', sans-serif;
+  text-shadow: 0 0 0.3em black;
+  margin-bottom: 0.3em;
+  z-index: 3;
+}
+#logo {
+  margin-right: 1.75em;
+  display: inline;
+}
+.secondary-color {
+  color: red;
+  display: inline;
 }
 #name {
   font-size: 150%;
@@ -102,7 +111,7 @@ canvas {
 #text {
   background-color: rgba(0,0,0,0.2);
   backdrop-filter: blur(1em);
-  box-shadow: -0.05em -0.05em cyan, 0.05em 0.05em red;
+  box-shadow: -0.05em -0.05em cyan, 0.05em 0.05em red, 0 0 0.3em black;
   border-radius: 0.5em;
   line-height: 120%;
   padding: 1em;
@@ -131,7 +140,7 @@ canvas {
   z-index: 2;
   display: none;
   max-width: 100%;
-  box-shadow: -0.05em -0.05em cyan, 0.05em 0.05em red;
+  box-shadow: -0.05em -0.05em cyan, 0.05em 0.05em red, 0 0 0.3em black;
 }
 #closeButton {
   cursor: pointer;
@@ -167,7 +176,8 @@ a.active {
 <div class="contentContainer">
   <div id="symbolBox">
     <div id="symbol">
-    &#x259A;&#x259E; vsistek.eu
+      <div id="logo"><div class="secondary-color">&#x259A;</div>&#x259E;</div><br/>
+      <div class="secondary-color">v</div>sistek<div class="secondary-color">.eu</div>
     </div>
   </div>
   <div id="text">
