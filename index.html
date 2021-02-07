@@ -110,10 +110,10 @@ canvas {
 }
 #text {
   background-color: rgba(0,0,0,0.2);
-  backdrop-filter: blur(1em);
+  backdrop-filter: blur(0.1em);
   box-shadow: -0.05em -0.05em cyan, 0.05em 0.05em red, 0 0 0.3em black;
   border-radius: 0.5em;
-  line-height: 120%;
+  line-height: 130%;
   padding: 1em;
 }
 .center {
@@ -163,7 +163,12 @@ a:hover {
   color: cyan;
 }
 a.active {
-  color: cyan;
+  color: red;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 1em;
 }
 </style>
 <script src="tdl/base.js"></script>
@@ -190,7 +195,6 @@ a.active {
     <li>Based in Prague, Czechia (EU)</li>
     </ul>
   <div class="center">
-    <p>&#8258;</p>
     <span id="email">[allow js to see email]</span><br>
     <a href="https://github.com/vsistek">[GitHub]</a>
     <a href="https://www.linkedin.com/in/vaclavsistek/">[LinkedIn]</a>
