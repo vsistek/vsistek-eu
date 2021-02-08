@@ -1,4 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" height="128" width="128">
-<text x="0" y="0.8em" font-size="8" style="fill: red">&#x259A;</text>
-<text x="5" y="0.8em" font-size="8" style="fill: cyan">&#x259E;</text>
+<svg xmlns="http://www.w3.org/2000/svg" height="200" width="200">
+<rect width="50" height="95" x="0" y="5" style="fill:red" />
+<rect width="50" height="95" x="150" y="5" style="fill:cyan" />
+<rect width="50" height="95" x="50" y="100" style="fill:red" />
+<rect width="50" height="95" x="100" y="100" style="fill:cyan" />
 </svg>
