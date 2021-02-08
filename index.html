@@ -85,18 +85,13 @@ canvas {
   right: 0;
   font-size: 150%;
   line-height: 1.5em;
-  font-family: 'Fira Mono', sans-serif;
+  font-family: 'Fira Mono', monospace;
   text-shadow: 0 0 0.3em black;
   margin-bottom: 0.3em;
   z-index: 3;
 }
 #logo {
   margin-right: 1.75em;
-  display: inline;
-}
-.secondary-color {
-  color: red;
-  display: inline;
 }
 #name {
   font-size: 150%;
@@ -150,7 +145,7 @@ canvas {
   z-index: 3;
 }
 pre {
-  font-family: 'Fira Mono', sans-serif;
+  font-family: 'Fira Mono', monospace;
   font-size: 50%;
 }
 a {
@@ -180,8 +175,10 @@ ul {
 <div class="contentContainer">
   <div id="symbolBox">
     <div id="symbol">
-      <div id="logo"><div class="secondary-color">&#x259A;</div>&#x259E;</div><br/>
-      <div class="secondary-color">v</div>sistek<div class="secondary-color">.eu</div>
+      <div id="logo">
+        <span style="color:red">&#x259A;</span><span style="color:cyan">&#x259E;</span>
+      </div>
+      <span style="color:red">v</span><span style="color:cyan">sistek</span><span style="color:red">.eu</span>
     </div>
   </div>
   <div id="text">
