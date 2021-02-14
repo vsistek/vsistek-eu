@@ -85,8 +85,8 @@ function FlowerEffect(primitive) {
     }
   }
 
-  this.render = function(framebuffer, time, hue, sat, opacity, bgcolor) {
-    m4.perspective(proj, tdl.math.degToRad(120), aspect, 0.1, 1);
+  this.render = function(framebuffer, time, hue, sat, opacity, pov, bgcolor) {
+    m4.perspective(proj, tdl.math.degToRad(pov), aspect, 0.1, 1);
     m4.rotationY(world, time*1.5)
     m4.mul(viewproj, view, proj)
     m4.mul(worldviewproj, world, viewproj)

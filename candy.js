@@ -61,7 +61,7 @@ function mainloop() {
     var now = ((new Date()).getTime() - bootTime) * 0.0001;
     aspect = canvas.clientWidth / canvas.clientHeight
     var framebuffer = backbuffer;
-    singleEffect.render(framebuffer, now, 0, 0, 0.3, "solaris")
+    singleEffect.render(framebuffer, now, 0, 0, 0.3, 90, "solaris")
     g_requestId = requestAnimationFrame(render);
   }
   render();
