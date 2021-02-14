@@ -30,8 +30,15 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-function FlowerEffect() {
-  var arrays = tdl.primitives.createCube(1);
+function FlowerEffect(primitive) {
+  switch (primitive) {
+    case "sphere":
+      var arrays = tdl.primitives.createSphere(0.6, 192, 192)
+      break;
+    case "cube":
+      var arrays = tdl.primitives.createCube(1)
+      break;
+  }
   var program = tdl.programs.loadProgramFromScriptTags("flower_vs", "flower_fs")
   var textures = []
 
@@ -44,8 +51,16 @@ function FlowerEffect() {
 
   var model = new tdl.models.Model(program, arrays, textures);
 
-  var eyePosition = new Float32Array([0, 0, 0.5])
-  var target = new Float32Array([0, 0, 0])
+  switch (primitive) {
+    case "sphere":
+      var eyePosition = new Float32Array([0, 0, 0.4])
+      var target = new Float32Array([0, 0, 0])
+      break;
+    case "cube":
+      var eyePosition = new Float32Array([0, 0, 0.5])
+      var target = new Float32Array([0, 0, 0])
+      break;
+  }
 
   var m4 = tdl.fast.matrix4
 
@@ -70,13 +85,20 @@ function FlowerEffect() {
     }
   }
 
-  this.render = function(framebuffer, time, hue, sat) {
+  this.render = function(framebuffer, time, hue, sat, bgcolor) {
     m4.perspective(proj, tdl.math.degToRad(120), aspect, 0.1, 1);
     m4.rotationY(world, time*1.5)
     m4.mul(viewproj, view, proj)
     m4.mul(worldviewproj, world, viewproj)
 
-    gl.clearColor(0, 0, 0, 1)
+    switch (bgcolor) {
+      case "black":
+        gl.clearColor(0, 0, 0, 1)
+        break;
+      case "solaris":
+        gl.clearColor(0.368, 0.498, 0.608, 1)
+        break;
+    }
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
     gl.disable(gl.CULL_FACE);
     gl.disable(gl.DEPTH_TEST);

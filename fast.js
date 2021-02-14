@@ -62,7 +62,7 @@ var output = alert
 
 function mainloop() {
   var bootTime = (new Date()).getTime();
-  var singleEffect = new FlowerEffect();
+  var singleEffect = new FlowerEffect("cube");
   function render() {
     var now = ((new Date()).getTime() - bootTime) * 0.00005;
     aspect = canvas.clientWidth / canvas.clientHeight
@@ -78,7 +78,7 @@ function mainloop() {
       g_step = -(g_step);
     }
 
-    singleEffect.render(framebuffer, now, g_hue, g_sat)
+    singleEffect.render(framebuffer, now, g_hue, g_sat, "black")
     g_requestId = requestAnimationFrame(render);
   }
   render();
