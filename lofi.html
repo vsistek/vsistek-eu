@@ -145,21 +145,6 @@ ul {
 var user = 'vsistek',
     domain = 'fsfe.org'
 document.getElementById('email').innerHTML = user + '@' + domain;;
-
-var cur_color = -1,
-    colors = [
-        'rgb(255,127,127)',
-        'rgb(255,64,64)',
-        'rgb(255,16,16)',
-        'rgb(255,0,0)',
-        'rgb(255,16,16)',
-        'rgb(255,64,64)'
-    ];
-
-var myInterval = setInterval(function() {
-    document.getElementById('asciiart').style.color = colors[(++cur_color) % colors.length];
-}, 100);
-
 </script>
 
 </html>
