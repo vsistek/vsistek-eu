@@ -78,7 +78,7 @@ function mainloop() {
       g_step = -(g_step);
     }
 
-    singleEffect.render(framebuffer, now, g_hue, g_sat, "black")
+    singleEffect.render(framebuffer, now, g_hue, g_sat, 0.7, "black")
     g_requestId = requestAnimationFrame(render);
   }
   render();

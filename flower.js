@@ -85,7 +85,7 @@ function FlowerEffect(primitive) {
     }
   }
 
-  this.render = function(framebuffer, time, hue, sat, bgcolor) {
+  this.render = function(framebuffer, time, hue, sat, opacity, bgcolor) {
     m4.perspective(proj, tdl.math.degToRad(120), aspect, 0.1, 1);
     m4.rotationY(world, time*1.5)
     m4.mul(viewproj, view, proj)
@@ -107,8 +107,8 @@ function FlowerEffect(primitive) {
     var boom = 0.0 //0.5 + Math.sin(time)*0.5
     var uniformsConst = {
       u_time: time,
-      //u_color: hsv2rgb((time * 0.1) % 0.8, 0.6, 0.3, 1),
-      u_color: hsv2rgb(hue, sat, 0.7, 0.7),
+      //u_color: hsv2rgb(hue, sat, 0.7, 0.7),
+      u_color: hsv2rgb(hue, sat, opacity, opacity),
       u_color2: hsv2rgb(hue, sat, 0.3, 0.3),
     }
     var uniformsPer = {
