@@ -79,10 +79,47 @@ html, body {
 #copyright {
   color: cyan;
   font-size: 80%;
+  cursor: pcursor: pointer;ointer;
   position: fixed;
   bottom: 0.2em;
+  cursor: pointer;
   left: 0.5em;
   z-index: 2;
+}
+.box {
+  background-color: black;
+  border-radius: 0.5em;
+  padding: 1em;
+  padding-top: 2em;
+  color: white;
+  box-shadow: -0.05em -0.05em cyan, 0.05em 0.05em red, 0 0 0.3em black;
+  font-size: 80%;
+}
+#legal {
+  position: fixed;
+  bottom: 2em;
+  left: 0.5em;
+  z-index: 2;
+  display: none;
+  max-width: 320px;
+}
+#humanoid {
+  width:800px;
+  height:600px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  display: none;
+}
+.closeButton {
+  cursor: pointer;
+  position: absolute;
+  right: 0.3em;
+  top: 0;
+  font-size: 200%;
+  z-index: 3;
 }
 #themes {
   position: fixed;
@@ -143,8 +180,25 @@ ul {
   </div>
   </div>
 </div>
-<div id="copyright" onclick="toggleLegalBox()">
-  Václav Šístek &copy; 2002-2021
+<div id="copyright" onclick="toggle('legal')">
+  Václav Šístek &copy; 2001-2021
+</div>
+<div id="legal" class="box">
+  <div class="closeButton" onclick="toggle('legal')">
+    &times;
+  </div>
+<p>The background image of starry sky is 20 years old, back from 2001.</p>
+<p>When I was 17, I had a plan to create a space travelling adventure game. I got it to a point of a working prototype of the game interface. Then I lost interest but I still keep a copy of my data from the old days.<p>
+<p>Recently, as a fun activity in lockdown, I had an idea to take the image data from that old project and put them together once again. To demonstrate how it may have looked like if I finished it.</p>
+<p>Here's what I get:</p>
+<img style="cursor: pointer" onclick="toggle('humanoid')" src="lofi-humanoid-splash.gif">
+<p class="center">[click image to see more]</p>
+</div>
+<div id="humanoid" class="box">
+  <div class="closeButton" onclick="toggle('humanoid')">
+    &times;
+  </div>
+  <img style="cursor: move" src="lofi-humanoid-interface.gif">
 </div>
 <div id="themes">
   Switch graphics mode:
@@ -160,6 +214,54 @@ ul {
 var user = 'vsistek',
     domain = 'fsfe.org'
 document.getElementById('email').innerHTML = user + '@' + domain;;
+document.getElementById('legal').style.display = "none";
+document.getElementById('humanoid').style.display = "none";
+
+function toggle(id) {
+  e = document.getElementById(id);
+  if (e.style.display === "none") {
+    e.style.display = "block";
+  } else {
+    e.style.display = "none";
+  }
+}
+
+dragElement(document.getElementById("humanoid"));
+
+function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  elmnt.onmousedown = dragMouseDown;
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    // stop moving when mouse button is released:
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
 </script>
 
 </html>
